@@ -1,0 +1,134 @@
+definitions:
+  models.Book:
+    properties:
+      author:
+        type: string
+      id:
+        type: integer
+      title:
+        type: string
+    type: object
+  models.CreateBookInput:
+    properties:
+      author:
+        type: string
+      title:
+        type: string
+    required:
+    - author
+    - title
+    type: object
+  models.UpdateBookInput:
+    properties:
+      author:
+        type: string
+      title:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /books:
+    get:
+      consumes:
+      - application/json
+      description: Get details of all books
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Book'
+            type: array
+      summary: Get details of all books
+      tags:
+      - books
+    post:
+      consumes:
+      - application/json
+      description: Creates book entry
+      parameters:
+      - description: Create book
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateBookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: ""
+      summary: Creates book entry
+      tags:
+      - books
+  /books/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete book
+      parameters:
+      - description: ID of the book
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete book
+      tags:
+      - books
+    get:
+      consumes:
+      - application/json
+      description: Find book
+      parameters:
+      - description: ID of the book
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: ""
+      summary: Find book
+      tags:
+      - books
+    patch:
+      consumes:
+      - application/json
+      description: Update a book
+      parameters:
+      - description: ID of the book
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update book
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateBookInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: ""
+      summary: Update a book
+      tags:
+      - books
+swagger: "2.0"
